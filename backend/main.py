@@ -21,7 +21,7 @@ app = FastAPI(title="PHYS 161 Exam Platform", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=CORS_ORIGINS,
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -131,4 +131,5 @@ def submit_exam(exam_id: str, submission: ExamSubmission, db: Session = Depends(
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+
 
