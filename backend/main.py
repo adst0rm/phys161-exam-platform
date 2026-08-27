@@ -38,6 +38,16 @@ def is_correct(submitted: float, expected: float) -> bool:
     return abs((submitted - expected) / expected) <= GRADING_TOLERANCE
 
 
+
+@app.get("/api/exam/seed")
+def seed_db_endpoint():
+    from seed import seed_database
+    try:
+        seed_database()
+        return {"status": "success", "message": "Database seeded successfully!"}
+    except Exception as e:
+        return {"status": "error", "detail": str(e)}
+
 @app.get("/api/health")
 def health_check():
     """Health check endpoint."""
@@ -131,5 +141,6 @@ def submit_exam(exam_id: str, submission: ExamSubmission, db: Session = Depends(
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+
 
 
