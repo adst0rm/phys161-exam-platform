@@ -1,4 +1,4 @@
-﻿export const API_URL = 'http://localhost:8000/api';
+﻿export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
 export interface Problem {
     problem_id: string;
@@ -48,3 +48,4 @@ export async function submitExam(examId: string, answers: { problem_id: string, 
     if (!res.ok) throw new Error('Failed to submit exam');
     return res.json();
 }
+
