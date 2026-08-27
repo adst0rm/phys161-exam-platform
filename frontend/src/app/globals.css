@@ -1,0 +1,184 @@
+@import 'katex/dist/katex.min.css';
+
+:root {
+  --nu-blue: #1d2a57;
+  --nu-gray-bg: #f5f5f5;
+  --nu-white: #ffffff;
+  --nu-border: #dee2e6;
+  --nu-link: #0d6efd;
+  --nu-text: #212529;
+  --nu-green-bg: #d4edda;
+  --nu-red-bg: #f8d7da;
+  --nu-yellow-bg: #fff3cd;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--nu-gray-bg);
+  color: var(--nu-text);
+}
+
+.moodle-header {
+  background-color: var(--nu-blue);
+  color: var(--nu-white);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+.moodle-header h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.moodle-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+.moodle-breadcrumb {
+  font-size: 0.9rem;
+  color: var(--nu-link);
+  margin-bottom: 20px;
+}
+.moodle-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.moodle-title h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.moodle-btn {
+  background-color: var(--nu-blue);
+  color: var(--nu-white);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.moodle-btn-primary {
+  background-color: var(--nu-link);
+}
+.moodle-btn:hover {
+  opacity: 0.9;
+}
+
+/* Exam Layout */
+.exam-layout {
+  display: flex;
+  gap: 20px;
+}
+.exam-sidebar {
+  width: 150px;
+  flex-shrink: 0;
+}
+.exam-sidebar-card {
+  background: var(--nu-white);
+  border: 1px solid var(--nu-border);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.exam-sidebar-title {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+}
+.exam-sidebar-status {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-bottom: 15px;
+}
+.exam-sidebar-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.nav-box {
+  width: 30px;
+  height: 40px;
+  border: 1px solid var(--nu-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--nu-white);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.nav-box.answered {
+  border-bottom: 3px solid #6c757d; /* Gray bottom for answered */
+}
+.nav-box.active {
+  border: 2px solid var(--nu-link);
+}
+
+/* Question Area */
+.exam-question {
+  flex-grow: 1;
+  background: #eaf5f7; /* light cyan from screenshot */
+  border: 1px solid #bce8f1;
+  padding: 20px;
+  border-radius: 4px;
+}
+.question-text {
+  margin-bottom: 15px;
+}
+.question-input {
+  display: block;
+  width: 150px;
+  padding: 6px 12px;
+  border: 1px solid var(--nu-border);
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Summary Table */
+.summary-table {
+  width: 100%;
+  background: var(--nu-white);
+  border-collapse: collapse;
+}
+.summary-table th, .summary-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--nu-border);
+  text-align: left;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: var(--nu-white);
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+}
+.modal-warning {
+  background: var(--nu-yellow-bg);
+  padding: 15px;
+  border-radius: 4px;
+  margin: 15px 0;
+  border: 1px solid #ffeeba;
+}
+
+.result-correct-bg {
+  background-color: var(--nu-green-bg);
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  margin-top: 10px;
+}
+.result-incorrect-bg {
+  background-color: var(--nu-red-bg);
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin-top: 10px;
+}
