@@ -24,8 +24,8 @@ export default function ExamPage() {
     });
   }, []);
 
-  if (loading) return <div style={{padding: '50px', textAlign: 'center'}} suppressHydrationWarning>Loading exam...</div>;
-  if (!exam) return <div style={{padding: '50px'}} suppressHydrationWarning>Error loading exam</div>;
+  if (loading) return <div style={{ padding: '50px', textAlign: 'center' }} suppressHydrationWarning>Loading exam...</div>;
+  if (!exam) return <div style={{ padding: '50px' }} suppressHydrationWarning>Error loading exam</div>;
 
   const currentProblem = exam.problems[currentIdx];
 
@@ -61,12 +61,12 @@ export default function ExamPage() {
       <div className="moodle-breadcrumb" suppressHydrationWarning>
         Physics I / General / Trial exam
       </div>
-      
+
       <div className="moodle-title" suppressHydrationWarning>
         <span style={{ fontSize: '1.5rem', color: '#e83e8c', marginRight: '10px' }}>📋</span>
-        <h2>Trial exam</h2>
+        <h2>PHYS 161 - Exam 1 - Simulation</h2>
       </div>
-      
+
       {!showSummary ? (
         <div className="exam-layout" suppressHydrationWarning>
           <div className="exam-sidebar" suppressHydrationWarning>
@@ -74,16 +74,16 @@ export default function ExamPage() {
             <div className="exam-sidebar-card" suppressHydrationWarning>
               <div className="exam-sidebar-title" suppressHydrationWarning>Question <strong>{currentIdx + 1}</strong></div>
               <div className="exam-sidebar-status" suppressHydrationWarning>{answers[currentProblem.problem_id] ? 'Answer saved' : 'Not yet answered'}</div>
-              <div style={{fontSize: '0.8rem', marginBottom: '10px'}} suppressHydrationWarning>Marked out of 1.00</div>
-              <div style={{fontSize: '0.8rem', color: 'var(--nu-link)', cursor: 'pointer'}} suppressHydrationWarning>⚑ Flag question</div>
+              <div style={{ fontSize: '0.8rem', marginBottom: '10px' }} suppressHydrationWarning>Marked out of 1.00</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--nu-link)', cursor: 'pointer' }} suppressHydrationWarning>⚑ Flag question</div>
             </div>
-            
+
             <div className="exam-sidebar-card" style={{ marginTop: '20px' }} suppressHydrationWarning>
               <div style={{ fontSize: '0.9rem', marginBottom: '10px' }} suppressHydrationWarning>Quiz navigation</div>
               <div className="exam-sidebar-nav" suppressHydrationWarning>
                 {exam.problems.map((p, i) => (
-                  <div 
-                    key={p.problem_id} 
+                  <div
+                    key={p.problem_id}
                     className={`nav-box ${answers[p.problem_id] ? 'answered' : ''} ${i === currentIdx ? 'active' : ''}`}
                     onClick={() => setCurrentIdx(i)}
                     suppressHydrationWarning
@@ -98,7 +98,7 @@ export default function ExamPage() {
             </div>
           </div>
 
-          <div style={{flexGrow: 1}} suppressHydrationWarning>
+          <div style={{ flexGrow: 1 }} suppressHydrationWarning>
             <div className="exam-question" suppressHydrationWarning>
               <div className="question-text" dangerouslySetInnerHTML={{ __html: renderLatex(currentProblem.problem_text) }} suppressHydrationWarning></div>
               {currentProblem.image_file && (
@@ -107,12 +107,12 @@ export default function ExamPage() {
                 </div>
               )}
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }} suppressHydrationWarning>
-                <input 
-                  type="number" 
+                <input
+                  type="number"
                   step="any"
-                  className="question-input" 
+                  className="question-input"
                   value={answers[currentProblem.problem_id] || ''}
-                  onChange={(e) => setAnswers({...answers, [currentProblem.problem_id]: e.target.value})}
+                  onChange={(e) => setAnswers({ ...answers, [currentProblem.problem_id]: e.target.value })}
                   suppressHydrationWarning
                 />
                 {currentProblem.unit && <span suppressHydrationWarning>{currentProblem.unit}</span>}

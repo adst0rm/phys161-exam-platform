@@ -31,7 +31,7 @@ export default function RootLayout({
             Created by Adil Yergen. <a href="https://github.com/adst0rm" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--nu-link)', textDecoration: 'none' }} suppressHydrationWarning>GitHub</a> | <a href="https://www.instagram.com/_adstorm/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--nu-link)', textDecoration: 'none' }} suppressHydrationWarning>Instagram</a>
           </div>
           <div suppressHydrationWarning>
-            for any question and recommendations: adil.yergen@nu.edu.kz or telegram username @phys161supportchat
+            for any questions and recommendations: adil.yergen@nu.edu.kz or telegram username @phys161supportchat
           </div>
         </footer>
       </body>

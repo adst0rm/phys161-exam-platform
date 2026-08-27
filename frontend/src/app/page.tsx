@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -12,7 +12,11 @@ export default function Home() {
       
       <div className="moodle-title" suppressHydrationWarning>
         <span style={{ fontSize: '2rem', color: '#e83e8c', marginRight: '10px' }}>📋</span>
-        <h2 style={{ fontSize: '2rem', margin: 0 }}>Trial exam</h2>
+        <h2 style={{ fontSize: '2rem', margin: 0 }}>PHYS 161 - Exam 1 - Simulation</h2>
+      </div>
+
+      <div style={{ marginTop: '20px', fontSize: '1.1rem', textAlign: 'center' }} suppressHydrationWarning>
+        <p>Mon-Fri: Exam 1, Chapters 1-6 (during recitation classes) - Week 4 - 07/09-11/09</p>
       </div>
 
       <div style={{ marginTop: '30px', textAlign: 'center' }} suppressHydrationWarning>
