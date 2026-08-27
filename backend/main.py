@@ -13,7 +13,7 @@ from schemas import (
 )
 
 # Create tables on startup
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="PHYS 161 Exam Platform", version="1.0.0")
 
@@ -131,3 +131,4 @@ def submit_exam(exam_id: str, submission: ExamSubmission, db: Session = Depends(
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+
