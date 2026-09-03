@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -41,6 +42,7 @@ export default function RootLayout({
           </div>
         </header>
         {children}
+        <Analytics />
         <footer style={{ textAlign: 'center', padding: '20px', marginTop: '40px', fontSize: '0.9rem', color: '#6c757d', borderTop: '1px solid #dee2e6', lineHeight: '1.6' }} suppressHydrationWarning>
           <div suppressHydrationWarning>
             Created by Adil Yergen. <a href="https://github.com/adst0rm" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--nu-link)', textDecoration: 'none' }} suppressHydrationWarning>GitHub</a> | <a href="https://www.instagram.com/_adstorm/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--nu-link)', textDecoration: 'none' }} suppressHydrationWarning>Instagram</a>
