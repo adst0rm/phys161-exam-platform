@@ -1,4 +1,4 @@
-﻿"""FastAPI application - PHYS 161 Exam Platform API."""
+"""FastAPI application - PHYS 161 Exam Platform API."""
 import uuid
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,9 +11,7 @@ from models import Problem
 from schemas import (
     ProblemOut, ExamSession, ExamSubmission, ExamResult, ProblemResult
 )
-
-# Create tables on startup
-# Base.metadata.create_all(bind=engine)
+from moodle_grading import grade_problem
 
 app = FastAPI(title="PHYS 161 Exam Platform", version="1.0.0")
 
@@ -31,14 +29,6 @@ app.add_middleware(
 exam_sessions: dict[str, list[str]] = {}
 
 
-def is_correct(submitted: float, expected: float) -> bool:
-    """Check if submitted value is within 1% relative error of expected."""
-    if expected == 0:
-        return abs(submitted) < 1e-9
-    return abs((submitted - expected) / expected) <= GRADING_TOLERANCE
-
-
-
 @app.get("/api/exam/seed")
 def seed_db_endpoint():
     from seed import seed_database
@@ -47,6 +37,7 @@ def seed_db_endpoint():
         return {"status": "success", "message": "Database seeded successfully!"}
     except Exception as e:
         return {"status": "error", "detail": str(e)}
+
 
 @app.get("/api/health")
 def health_check():
@@ -73,15 +64,26 @@ def start_exam(db: Session = Depends(get_db)):
     exam_id = str(uuid.uuid4())
     exam_sessions[exam_id] = [p.problem_id for p in problems]
 
+    problems_out = [
+        ProblemOut(
+            problem_id=p.problem_id,
+            topic=p.topic,
+            problem_text=p.problem_text,
+            requires_unit=bool(p.unit and p.unit.strip()),
+            image_file=p.image_file,
+        )
+        for p in problems
+    ]
+
     return ExamSession(
         exam_id=exam_id,
-        problems=[ProblemOut.model_validate(p) for p in problems]
+        problems=problems_out
     )
 
 
 @app.post("/api/exam/{exam_id}/submit", response_model=ExamResult)
 def submit_exam(exam_id: str, submission: ExamSubmission, db: Session = Depends(get_db)):
-    """Grade a submitted exam."""
+    """Grade a submitted exam using Moodle Formulas question 90%/10% scoring."""
     if exam_id not in exam_sessions:
         raise HTTPException(status_code=404, detail="Exam session not found.")
 
@@ -96,22 +98,30 @@ def submit_exam(exam_id: str, submission: ExamSubmission, db: Session = Depends(
     problem_map = {p.problem_id: p for p in problems}
 
     # Build answer lookup
-    answer_map = {a.problem_id: a.submitted_value for a in submission.answers}
+    answer_map = {a.problem_id: a for a in submission.answers}
 
     results = []
-    score = 0
+    total_score = 0.0
+
     for pid in problem_ids:
         p = problem_map.get(pid)
         if not p:
             continue
 
-        submitted = answer_map.get(pid)
-        was_answered = submitted is not None
-        correct = False
-        if was_answered:
-            correct = is_correct(submitted, p.correct_value)
-            if correct:
-                score += 1
+        ans = answer_map.get(pid)
+        raw_val = str(ans.submitted_value).strip() if ans and ans.submitted_value is not None else None
+        raw_unit = str(ans.submitted_unit).strip() if ans and ans.submitted_unit is not None else None
+        was_answered = bool(raw_val or raw_unit)
+
+        grade = grade_problem(
+            submitted_value_raw=raw_val,
+            submitted_unit_raw=raw_unit,
+            expected_value=p.correct_value,
+            expected_unit_str=p.unit,
+            tolerance=GRADING_TOLERANCE,
+        )
+
+        total_score += grade.mark
 
         results.append(ProblemResult(
             problem_id=p.problem_id,
@@ -119,10 +129,16 @@ def submit_exam(exam_id: str, submission: ExamSubmission, db: Session = Depends(
             problem_text=p.problem_text,
             unit=p.unit,
             image_file=p.image_file,
-            submitted_value=submitted,
+            submitted_value=raw_val,
+            submitted_unit=raw_unit,
             correct_value=p.correct_value,
-            is_correct=correct,
+            mark=round(grade.mark, 2),
+            max_mark=grade.max_mark,
+            is_correct=grade.is_correct,
+            number_correct=grade.number_correct,
+            unit_correct=grade.unit_correct,
             was_answered=was_answered,
+            feedback=grade.feedback,
         ))
 
     total = len(problem_ids)
@@ -131,9 +147,9 @@ def submit_exam(exam_id: str, submission: ExamSubmission, db: Session = Depends(
 
     return ExamResult(
         exam_id=exam_id,
-        score=score,
+        score=round(total_score, 2),
         total=total,
-        percentage=round((score / total) * 100, 2) if total > 0 else 0,
+        percentage=round((total_score / total) * 100, 2) if total > 0 else 0,
         results=results,
     )
 
@@ -141,6 +157,3 @@ def submit_exam(exam_id: str, submission: ExamSubmission, db: Session = Depends(
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
-
-
-

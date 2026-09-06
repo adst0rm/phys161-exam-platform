@@ -1,10 +1,10 @@
-﻿export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
 export interface Problem {
     problem_id: string;
     topic: string;
     problem_text: string;
-    unit?: string | null;
+    requires_unit: boolean;
     image_file?: string | null;
 }
 
@@ -13,16 +13,28 @@ export interface ExamSession {
     problems: Problem[];
 }
 
+export interface SubmittedAnswer {
+    problem_id: string;
+    submitted_value?: string | null;
+    submitted_unit?: string | null;
+}
+
 export interface ProblemResult {
     problem_id: string;
     topic: string;
     problem_text: string;
     unit?: string | null;
     image_file?: string | null;
-    submitted_value?: number | null;
+    submitted_value?: string | null;
+    submitted_unit?: string | null;
     correct_value: number;
+    mark: number;
+    max_mark: number;
     is_correct: boolean;
+    number_correct: boolean;
+    unit_correct: boolean;
     was_answered: boolean;
+    feedback?: string | null;
 }
 
 export interface ExamResult {
@@ -39,7 +51,7 @@ export async function startExam(): Promise<ExamSession> {
     return res.json();
 }
 
-export async function submitExam(examId: string, answers: { problem_id: string, submitted_value: number | null }[]): Promise<ExamResult> {
+export async function submitExam(examId: string, answers: SubmittedAnswer[]): Promise<ExamResult> {
     const res = await fetch(`${API_URL}/exam/${examId}/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -48,4 +60,3 @@ export async function submitExam(examId: string, answers: { problem_id: string, 
     if (!res.ok) throw new Error('Failed to submit exam');
     return res.json();
 }
-
