@@ -117,7 +117,7 @@
     "problem_text": "For the vectors A and B, find the magnitude of the vector sum A + B. Vector A is 7 m and vector B is 12 m long. (6.8926 m).",
     "correct_numerical_value": 6.8926,
     "unit": "m",
-    "image_file": null
+    "image_file": "set1/P15.png"
   },
   {
     "problem_id": "P16",
@@ -125,7 +125,7 @@
     "problem_text": "For the vectors A and B, find the magnitude of the vector difference A - B. Vector A is 7 m and vector B is 11 m long.",
     "correct_numerical_value": 17.418,
     "unit": "m",
-    "image_file": null
+    "image_file": "set1/P16.png"
   },
   {
     "problem_id": "P17",
@@ -133,7 +133,7 @@
     "problem_text": "Vector B is 7 m long, see image below. Find the x-component of the vector B = xi + yj.",
     "correct_numerical_value": 3.5,
     "unit": "m",
-    "image_file": "P17.png"
+    "image_file": "set1/P17.png"
   },
   {
     "problem_id": "P18",
@@ -165,7 +165,7 @@
     "problem_text": "Find the scalar product A ⋅ B of the two vectors in figure below. The magnitudes of the vectors are A = 7 and B = 12.",
     "correct_numerical_value": 18.8959,
     "unit": null,
-    "image_file": "P21.png"
+    "image_file": "set1/P21.png"
   },
   {
     "problem_id": "P22",
@@ -173,7 +173,7 @@
     "problem_text": "Find the magnitude of the vector product A × B of the two vectors in the figure below. The magnitudes of the vectors are A = 8 and B = 10.5.",
     "correct_numerical_value": 81.8471,
     "unit": null,
-    "image_file": "P22.png"
+    "image_file": "set1/P22.png"
   },
   {
     "problem_id": "P23",
@@ -405,7 +405,7 @@
     "problem_text": "One kind of airplane must reach a speed before takeoff of at least 29.3 m/s, and can accelerate at 2.2 m/s2. What minimum length must the runway have in order for the airplane to be able to reach this speed before takeoff?",
     "correct_numerical_value": 195.11136363636,
     "unit": "m",
-    "image_file": null
+    "image_file": "set1/P51.png"
   },
   {
     "problem_id": "P52",
@@ -525,7 +525,7 @@
     "problem_text": "During a fireworks display, a shell is shot into the air with an initial speed of 87 m/s at an angle of 80° above the horizontal. The fuse is timed to ignite the shell just as it reaches its highest point above the ground. How much time passes between the launch of the shell and the explosion? The gravitational acceleration is g = 9.8 m/s2.",
     "correct_numerical_value": 8.7422747172345,
     "unit": "s",
-    "image_file": null
+    "image_file": "set1/P66.png"
   },
   {
     "problem_id": "P67",
@@ -541,7 +541,7 @@
     "problem_text": "In a local café, a customer slides an empty mug down the counter for a refill. The mug slides off the counter and strikes the floor xf = 1.49 m from the base of the counter. If the height of the counter is yi = 85 cm, what is the magnitude of the velocity with which the mug left the counter? The gravitational acceleration is g = 9.8 m/s2.",
     "correct_numerical_value": 3.5774604860727,
     "unit": "m/s",
-    "image_file": null
+    "image_file": "set1/P68.png"
   },
   {
     "problem_id": "P69",
@@ -645,7 +645,7 @@
     "problem_text": "The car passes over a rise in the roadway such that the top of the rise is shaped like a circle of radius 530 m. At the moment the car is at the top of the rise, its velocity is 24 km/h and constant acceleration parallel to the roadway is 0.34 m/s2. What is the magnitude of the total acceleration vector for the car at this instant?",
     "correct_numerical_value": 0.3501886215,
     "unit": "m/s^2",
-    "image_file": null
+    "image_file": "set1/P81.png"
   },
   {
     "problem_id": "P82",
@@ -717,7 +717,7 @@
     "problem_text": "A block of mass m= 1 kg is moving with constant speed in a circle with radius r=0.18 m on a frictionless table. The block is attached to 1.5 kg mass, M, by a cord through a hole in the table. Find the speed with which m must move for M to stay at rest. Take gravitational acceleration g = 9.8 m/s2.",
     "correct_numerical_value": 1.627,
     "unit": "m/s",
-    "image_file": null
+    "image_file": "set1/P90.png"
   },
   {
     "problem_id": "P91",
@@ -733,7 +733,7 @@
     "problem_text": "A ball suspended from a pivot on a string of length L = 88 cm revolves in a horizontal plane with constant speed v. The string maintains an angle of θ = 14º with respect to the vertical. Find v taking gravitational acceleration g = 9.8 m/s2.",
     "correct_numerical_value": 0.721,
     "unit": "m/s",
-    "image_file": null
+    "image_file": "set1/P92.png"
   },
   {
     "problem_id": "P93",
@@ -741,7 +741,7 @@
     "problem_text": "A car of mass m = 1200 kg travels around a circular, banked road of radius R = 80 m. The road is inclined at an angle θ above the horizontal, as shown in the figure. The car travels at a constant speed of v = 20 m/s. Assume that friction between the tires and the road is negligible. Determine the required banking angle θ (in radians) so that the car can travel around the curve without relying on friction. The gravitational acceleration is g = 9.8 m/s².",
     "correct_numerical_value": 0.47177751,
     "unit": "rad",
-    "image_file": "P93.png"
+    "image_file": "set1/P93.png"
   },
   {
     "problem_id": "P94",
@@ -749,7 +749,7 @@
     "problem_text": "Figure shows a block with mass m1 = 3.561 kg on a horizontal surface, connected by a massless string to a hook where mass m2 can be increased smoothly. The pulley has a negligible mass and no friction. When m2 = 2.92 kg it begins to accelerate downwards at a rate of 1.645 m/s2. Calculate the difference between static and kinetic coefficients of friction, μs−μk, between m1 and the surface. Take gravitational acceleration g = 9.8 m/s2.",
     "correct_numerical_value": 0.305,
     "unit": null,
-    "image_file": "P94.png"
+    "image_file": "set1/P94.png"
   },
   {
     "problem_id": "P95",
@@ -757,7 +757,7 @@
     "problem_text": "Figure shows a block with mass m₁ = 4 kg on a horizontal surface, connected by a massless string over a massless frictionless pulley to a hanging mass m₂ = 2.8 kg. The coefficient of kinetic friction between m₁ and the surface is 0.31. Calculate the magnitude of the acceleration of the blocks. The gravitational acceleration is g = 9.8 m/s².",
     "correct_numerical_value": 2.24824,
     "unit": "m/s^2",
-    "image_file": "P95.png"
+    "image_file": "set1/P95.png"
   },
   {
     "problem_id": "P96",
@@ -765,7 +765,7 @@
     "problem_text": "Figure shows a block with mass m1 = 26.2 kg on a horizontal surface, connected to a m2 = 4.3 kg block by a massless string. The pulley is massless and frictionless. A force of 302.2 N acts on m1 at an angle of 30.9º. The coefficient of kinetic friction between m1 and the surface is 0.17. Determine the upward acceleration of m2. Take gravitational acceleration g = 9.8 m/s2.",
     "correct_numerical_value": 6.55,
     "unit": "m/s^2",
-    "image_file": "P96.png"
+    "image_file": "set1/P96.png"
   },
   {
     "problem_id": "P97",
@@ -789,7 +789,7 @@
     "problem_text": "Figure shows two blocks with masses m1 = 20.6 kg and m2 = 61.2 kg; the blocks are free to move. The surface beneath m2 is frictionless and the coefficient of static friction between the blocks is 0.36. Find the minimal force F required to hold m1 against m2?",
     "correct_numerical_value": 749.53631,
     "unit": "N",
-    "image_file": "P99.png"
+    "image_file": "set1/P99.png"
   },
   {
     "problem_id": "P100",
@@ -797,7 +797,7 @@
     "problem_text": "Figure shows two blocks with masses m₁ = 21 kg and m₂ = 59.5 kg. A horizontal force F = 770 N presses m₁ against the vertical face of m₂, and the coefficient of static friction between the blocks is large enough that m₁ does not slip down. The surface beneath m₂ is frictionless. Find the magnitude of the acceleration of the two blocks.",
     "correct_numerical_value": 9.56522,
     "unit": "m/s^2",
-    "image_file": "P100.png"
+    "image_file": "set1/P100.png"
   },
   {
     "problem_id": "P101",
@@ -813,7 +813,7 @@
     "problem_text": "A cord exerts a force F = 12 N at an angle θ=34° above the horizontal to a block of mass 5 kg, pulling the block along a horizontal frictionless floor. What is the magnitude of the normal force exerted on the mass by the floor?",
     "correct_numerical_value": 42.2897,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P102.png"
   },
   {
     "problem_id": "P103",
@@ -861,7 +861,7 @@
     "problem_text": "A force F lifts vertically a chain consisting of five links, each of mass 0.6 kg. The chain is lifted with a constant acceleration of magnitude a = 2.2 m/s2. What is the magnitude of the force that link 3 exerts on link 2. The gravitational acceleration is g = 9.8 m/s2.",
     "correct_numerical_value": 14.4,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P108.png"
   },
   {
     "problem_id": "P109",
@@ -869,7 +869,7 @@
     "problem_text": "A force F lifts vertically a chain consisting of five links, each of mass 0.1 kg. The chain is lifted with a constant acceleration of magnitude a = 2.1 m/s2. Find the magnitude of the force |F| that must be exerted on the top link to achieve this acceleration? The gravitational acceleration is g = 9.8 m/s2.",
     "correct_numerical_value": 5.95,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P109.png"
   },
   {
     "problem_id": "P110",
@@ -877,7 +877,7 @@
     "problem_text": "A force F lifts vertically a chain consisting of five links, each of mass 0.55 kg, numbered as in the figure: link 1 at the bottom and link 5 at the top. The chain is lifted with a constant acceleration of magnitude a = 2.3 m/s². What is the magnitude of the force that link 4 exerts on link 3? The gravitational acceleration is g = 9.8 m/s².",
     "correct_numerical_value": 19.965,
     "unit": "N",
-    "image_file": "P110.png"
+    "image_file": "set1/P110.png"
   },
   {
     "problem_id": "P111",
@@ -885,7 +885,7 @@
     "problem_text": "A force F lifts vertically a chain consisting of five links, each of mass 0.2 kg, numbered as in the figure: link 1 at the bottom and link 5 at the top. The chain is lifted with a constant acceleration of magnitude a = 2.7 m/s². What is the magnitude of the force that link 5 exerts on link 4? The gravitational acceleration is g = 9.8 m/s².",
     "correct_numerical_value": 10,
     "unit": "N",
-    "image_file": "P111.png"
+    "image_file": "set1/P111.png"
   },
   {
     "problem_id": "P112",
@@ -965,7 +965,7 @@
     "problem_text": "Two ropes are connected to a steel cable that supports a hanging weight. If the maximum tension either rope can sustain without breaking is 4200 N, determine the maximum value of the hanging weight that those ropes can safely support. Ignore the weight of the ropes and the steel cable.",
     "correct_numerical_value": 5399.518,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P121.png"
   },
   {
     "problem_id": "P122",
@@ -973,7 +973,7 @@
     "problem_text": "Two ropes are connected to a steel cable that supports a hanging weight of 3850 N. The ropes make angles of 60° and 40° with the ceiling, as shown in the figure. Determine the tension in the rope that makes the 40° angle with the ceiling. Ignore the weight of the ropes and the steel cable.",
     "correct_numerical_value": 1954.7,
     "unit": "N",
-    "image_file": "P122.png"
+    "image_file": "set1/P122.png"
   },
   {
     "problem_id": "P123",
@@ -981,7 +981,7 @@
     "problem_text": "A worker lifts a weight of 440 N by pulling down on a rope with a force F. Find the magnitude of the force F if the weight is lifted at a constant speed. Assume that the rope, pulleys, and chains all have negligible weights.",
     "correct_numerical_value": 220,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P123.png"
   },
   {
     "problem_id": "P124",
@@ -989,7 +989,7 @@
     "problem_text": "A worker lifts a weight of 380 N using the arrangement of pulleys shown in the figure, by pulling down on a rope with a force F. Find the magnitude of the force F if the weight is lifted with a constant upward acceleration of 2.1 m/s². Assume that the rope, pulleys, and chains all have negligible weight. The gravitational acceleration is g = 9.8 m/s².",
     "correct_numerical_value": 230.714,
     "unit": "N",
-    "image_file": "P124.png"
+    "image_file": "set1/P124.png"
   },
   {
     "problem_id": "P125",
@@ -997,7 +997,7 @@
     "problem_text": "The clothesline has a mass 600 g, and each end makes an angle 16° with horizontal. What is the tension at each end of the clothesline? The gravitational acceleration is g = 9.8 m/s2.",
     "correct_numerical_value": 10.666,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P125.png"
   },
   {
     "problem_id": "P126",
@@ -1013,7 +1013,7 @@
     "problem_text": "A block with mass m1 = 280 kg is placed on an inclined plane with slope angle α = 39° and is connected to a second hanging block with mass m2 by a cord passing over a small, frictionless pulley. The coefficient of kinetic friction is 0.09. Find the mass m2 for which block m1 moves up the plane at constant speed once it is set in motion.",
     "correct_numerical_value": 195.7938,
     "unit": "kg",
-    "image_file": null
+    "image_file": "set1/P127.png"
   },
   {
     "problem_id": "P128",
@@ -1021,7 +1021,7 @@
     "problem_text": "A block with mass m1 = 150 kg is placed on an inclined plane with slope angle α = 29° and is connected to a second hanging block with mass m2 by a cord passing over a small, frictionless pulley. The coefficient of kinetic friction is 0.076. Find the mass m2 for which block m1 moves down the plane at constant speed once it is set in motion.",
     "correct_numerical_value": 62.75,
     "unit": "kg",
-    "image_file": null
+    "image_file": "set1/P128.png"
   },
   {
     "problem_id": "P129",
@@ -1037,7 +1037,7 @@
     "problem_text": "A block with mass m₁ = 225 kg is placed on an inclined plane with slope angle α = 42° and is connected to a second hanging block by a cord passing over a small, frictionless pulley. The coefficient of kinetic friction between m₁ and the incline is 0.07. Find the tension in the cord for which m₁ moves up the plane at constant speed once it is set in motion. The gravitational acceleration is g = 9.8 m/s².",
     "correct_numerical_value": 1590.14,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P130.png"
   },
   {
     "problem_id": "P131",
@@ -1045,7 +1045,7 @@
     "problem_text": "Block A weighs 72 N. The coefficient of static friction between the block and the surface on which it rests is 0.29. Angle of the cord with horizontal is α = 52°. The weight w is 13 N and the system is in equilibrium. Find the friction force exerted on block A.",
     "correct_numerical_value": 10.1567,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P131.png"
   },
   {
     "problem_id": "P132",
@@ -1053,7 +1053,7 @@
     "problem_text": "Block A weighs 74 N. The coefficient of static friction between the block and the surface on which it rests is 0.24. Angle of the cord with horizontal is α = 45°. Find the maximum weight w for which the system will remain in equilibrium.",
     "correct_numerical_value": 17.76,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P132.png"
   },
   {
     "problem_id": "P133",
@@ -1061,7 +1061,7 @@
     "problem_text": "Block A weighs 62 N and rests on a horizontal surface. The angle of the cord with the horizontal is α = 58°. The weight w is 17.5 N and the system is in equilibrium. What is the minimum coefficient of static friction between block A and the surface on which it rests?",
     "correct_numerical_value": 0.176374,
     "unit": null,
-    "image_file": null
+    "image_file": "set1/P133.png"
   },
   {
     "problem_id": "P134",
@@ -1069,7 +1069,7 @@
     "problem_text": "Block A weighs 1.3 N and B weighs 3.1 N. The coefficient of kinetic friction between block B and the surfaces is 0.17, and coefficient of static friction between block A and block B is 0.17. Find the magnitude of the horizontal force F necessary to drag block B to the left at constant speed if A rests on B and moves with it.",
     "correct_numerical_value": 0.748,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P134.png"
   },
   {
     "problem_id": "P135",
@@ -1077,7 +1077,7 @@
     "problem_text": "Block A weighs 1.1 N and B weighs 3.3 N. The coefficient of kinetic friction between all surfaces is 0.24. Find the magnitude of the horizontal force F necessary to drag block B to the left at constant speed if A is held at rest.",
     "correct_numerical_value": 1.32,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P135.png"
   },
   {
     "problem_id": "P136",
@@ -1085,7 +1085,7 @@
     "problem_text": "Block A weighs 1.15 N and block B weighs 3.15 N. The coefficient of kinetic friction between block B and the floor is 0.17. The cord shown in the figure connecting block A to the wall has been cut, so block A rests freely on top of B and moves together with it. Find the magnitude of the horizontal force F necessary to drag block B to the left at constant speed.",
     "correct_numerical_value": 0.731,
     "unit": "N",
-    "image_file": "P136.png"
+    "image_file": "set1/P136.png"
   },
   {
     "problem_id": "P137",
@@ -1093,7 +1093,7 @@
     "problem_text": "A window washer pushes his scrub brush up a vertical window at constant speed by applying a force F at an angle α = 58.8°. The brush weighs 14 N and the coefficient of kinetic friction is μk = 0.17. Calculate the magnitude of the force F.",
     "correct_numerical_value": 18.245804831566,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P137.png"
   },
   {
     "problem_id": "P138",
@@ -1101,7 +1101,7 @@
     "problem_text": "A window washer pushes his scrub brush up a vertical window at constant speed by applying a force F at an angle α = 54.8°. The brush weighs 9 N and the coefficient of kinetic friction is μk = 0.14. Calculate the normal force exerted by the window on the brush.",
     "correct_numerical_value": 7.0445,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P138.png"
   },
   {
     "problem_id": "P139",
@@ -1141,7 +1141,7 @@
     "problem_text": "A small remote-control car with mass 2 kg moves at a constant speed of v = 11.4 m/s in a vertical circle inside a hollow metal cylinder that has a radius of 4 m. What is the magnitude of the normal force exerted on the car by the walls of the cylinder at point A? The gravitational acceleration is g = 9.8 m/s2.",
     "correct_numerical_value": 84.58,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P143.png"
   },
   {
     "problem_id": "P144",
@@ -1149,7 +1149,7 @@
     "problem_text": "A small remote-control car with mass 2.2 kg moves at a constant speed of v = 12.7 m/s in a vertical circle inside a hollow metal cylinder that has a radius of 4 m. What is the magnitude of the normal force exerted on the car by the walls of the cylinder at point B? The gravitational acceleration is g = 9.8 m/s2.",
     "correct_numerical_value": 67.1495,
     "unit": "N",
-    "image_file": null
+    "image_file": "set1/P144.png"
   },
   {
     "problem_id": "P145",
@@ -1157,7 +1157,7 @@
     "problem_text": "A small remote-control car with mass 1.9 kg moves in a vertical circle inside a hollow metal cylinder that has a radius of 4.3 m. What is the minimum speed the car must have at point B in order to maintain contact with the wall of the cylinder? The gravitational acceleration is g = 9.8 m/s².",
     "correct_numerical_value": 6.49153,
     "unit": "m/s",
-    "image_file": null
+    "image_file": "set1/P145.png"
   },
   {
     "problem_id": "P146",

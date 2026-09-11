@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState, useRef, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { startExam, submitExam, ExamSession, SubmittedAnswer } from '@/lib/api';
 import { renderLatex } from '@/lib/katex-utils';
 
@@ -9,8 +9,12 @@ interface AnswerState {
   unit: string;
 }
 
-export default function ExamPage() {
+function ExamContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const mode = searchParams.get('mode') === 'untimed' ? 'untimed' : 'timed';
+  const isTimed = mode === 'timed';
+
   const [exam, setExam] = useState<ExamSession | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -18,6 +22,16 @@ export default function ExamPage() {
   const [showSummary, setShowSummary] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showGuide, setShowGuide] = useState(false);
+
+  // Timer state (40 minutes = 2400 seconds)
+  const [timeLeft, setTimeLeft] = useState<number>(2400);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
+  const answersRef = useRef<Record<string, AnswerState>>({});
+
+  useEffect(() => {
+    answersRef.current = answers;
+  }, [answers]);
 
   useEffect(() => {
     startExam().then(res => {
@@ -30,8 +44,58 @@ export default function ExamPage() {
     });
   }, []);
 
+  // Timer countdown and automatic submission
+  useEffect(() => {
+    if (!isTimed || !exam) return;
+
+    let end = sessionStorage.getItem('exam_end_timestamp');
+    const now = Date.now();
+    let endTime: number;
+
+    if (end && !isNaN(Number(end))) {
+      endTime = Number(end);
+    } else {
+      endTime = now + 40 * 60 * 1000;
+      sessionStorage.setItem('exam_end_timestamp', String(endTime));
+    }
+
+    const checkTimer = () => {
+      const remaining = Math.max(0, Math.floor((endTime - Date.now()) / 1000));
+      setTimeLeft(remaining);
+
+      if (remaining <= 0 && !isSubmittingRef.current) {
+        isSubmittingRef.current = true;
+        setIsSubmitting(true);
+        sessionStorage.setItem('autoSubmitted', 'true');
+        sessionStorage.removeItem('exam_end_timestamp');
+
+        // Auto-submit current answers
+        const currentAnswers = answersRef.current;
+        const payload: SubmittedAnswer[] = exam.problems.map(p => ({
+          problem_id: p.problem_id,
+          submitted_value: currentAnswers[p.problem_id]?.value?.trim() || null,
+          submitted_unit: currentAnswers[p.problem_id]?.unit?.trim() || null,
+        }));
+
+        submitExam(exam.exam_id, payload)
+          .then(result => {
+            sessionStorage.setItem('examResult', JSON.stringify(result));
+            router.push('/results');
+          })
+          .catch(e => {
+            console.error('Failed to auto-submit exam:', e);
+            router.push('/results');
+          });
+      }
+    };
+
+    checkTimer();
+    const interval = setInterval(checkTimer, 1000);
+    return () => clearInterval(interval);
+  }, [isTimed, exam, router]);
+
   if (loading) return <div style={{ padding: '50px', textAlign: 'center' }} suppressHydrationWarning>Loading exam...</div>;
-  if (!exam) return <div style={{ padding: '50px' }} suppressHydrationWarning>Error loading exam</div>;
+  if (!exam) return <div style={{ padding: '50px', textAlign: 'center' }} suppressHydrationWarning>Error loading exam</div>;
 
   const currentProblem = exam.problems[currentIdx];
 
@@ -47,6 +111,7 @@ export default function ExamPage() {
   };
 
   const handleValueChange = (pid: string, val: string) => {
+    if (isSubmitting) return;
     setAnswers(prev => ({
       ...prev,
       [pid]: { value: val, unit: prev[pid]?.unit || '' }
@@ -54,6 +119,7 @@ export default function ExamPage() {
   };
 
   const handleUnitChange = (pid: string, unit: string) => {
+    if (isSubmitting) return;
     setAnswers(prev => ({
       ...prev,
       [pid]: { value: prev[pid]?.value || '', unit }
@@ -66,6 +132,12 @@ export default function ExamPage() {
   };
 
   const submitAll = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    isSubmittingRef.current = true;
+    sessionStorage.removeItem('exam_end_timestamp');
+    sessionStorage.removeItem('autoSubmitted');
+
     const payload: SubmittedAnswer[] = exam.problems.map(p => ({
       problem_id: p.problem_id,
       submitted_value: answers[p.problem_id]?.value?.trim() || null,
@@ -77,7 +149,15 @@ export default function ExamPage() {
       router.push('/results');
     } catch (e) {
       alert('Failed to submit exam');
+      setIsSubmitting(false);
+      isSubmittingRef.current = false;
     }
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   const unansweredCount = exam.problems.filter(p => !isAnswered(p.problem_id)).length;
@@ -90,13 +170,60 @@ export default function ExamPage() {
 
       <div className="moodle-title" suppressHydrationWarning>
         <span style={{ fontSize: '1.5rem', color: '#e83e8c', marginRight: '10px' }}>📋</span>
-        <h2>PHYS 161 - Exam 1 - Simulation</h2>
+        <h2>PHYS 161 - Exam 2 - Simulation</h2>
       </div>
 
       {!showSummary ? (
         <div className="exam-layout" suppressHydrationWarning>
           <div className="exam-sidebar" suppressHydrationWarning>
             <button className="moodle-btn" style={{ background: '#6c757d', marginBottom: '10px', width: '100%' }} onClick={() => router.push('/')}>Back</button>
+
+            {/* Timer or Untimed Status Card */}
+            {isTimed ? (
+              <div 
+                className="exam-sidebar-card" 
+                style={{ 
+                  marginBottom: '15px', 
+                  textAlign: 'center',
+                  borderLeft: timeLeft <= 60 ? '4px solid #dc3545' : timeLeft <= 300 ? '4px solid #ffc107' : '4px solid #0d6efd',
+                  backgroundColor: timeLeft <= 60 ? '#fff5f5' : timeLeft <= 300 ? '#fffdf5' : '#f8f9fa'
+                }} 
+                suppressHydrationWarning
+              >
+                <div style={{ fontSize: '0.85rem', color: '#6c757d', fontWeight: 600, marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                  <span>⏱️</span>
+                  <span>Time left</span>
+                </div>
+                <div 
+                  style={{ 
+                    fontSize: '1.5rem', 
+                    fontWeight: 700, 
+                    fontFamily: 'monospace',
+                    color: timeLeft <= 60 ? '#dc3545' : timeLeft <= 300 ? '#b78103' : '#333'
+                  }}
+                  suppressHydrationWarning
+                >
+                  {formatTime(timeLeft)}
+                </div>
+              </div>
+            ) : (
+              <div 
+                className="exam-sidebar-card" 
+                style={{ 
+                  marginBottom: '15px', 
+                  textAlign: 'center',
+                  borderLeft: '4px solid #6c757d',
+                  backgroundColor: '#f8f9fa'
+                }} 
+                suppressHydrationWarning
+              >
+                <div style={{ fontSize: '0.85rem', color: '#495057', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                  <span>♾️</span>
+                  <span>Untimed Practice</span>
+                </div>
+              </div>
+            )}
+
             <div className="exam-sidebar-card" suppressHydrationWarning>
               <div className="exam-sidebar-title" suppressHydrationWarning>Question <strong>{currentIdx + 1}</strong></div>
               <div className="exam-sidebar-status" suppressHydrationWarning>
@@ -131,7 +258,12 @@ export default function ExamPage() {
               <div className="question-text" dangerouslySetInnerHTML={{ __html: renderLatex(currentProblem.problem_text) }} suppressHydrationWarning></div>
               {currentProblem.image_file && (
                 <div style={{ marginBottom: '15px' }} suppressHydrationWarning>
-                  <img src={`/images/${currentProblem.image_file}`} alt="Problem image" style={{ maxWidth: '100%' }} suppressHydrationWarning />
+                  <img 
+                    src={currentProblem.image_file.startsWith('/') || currentProblem.image_file.startsWith('http') ? currentProblem.image_file : `/images/${currentProblem.image_file}`} 
+                    alt="Problem image" 
+                    style={{ maxWidth: '100%' }} 
+                    suppressHydrationWarning 
+                  />
                 </div>
               )}
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }} suppressHydrationWarning>
@@ -141,6 +273,7 @@ export default function ExamPage() {
                   placeholder="Answer"
                   value={answers[currentProblem.problem_id]?.value || ''}
                   onChange={(e) => handleValueChange(currentProblem.problem_id, e.target.value)}
+                  disabled={isSubmitting}
                   suppressHydrationWarning
                 />
                 {currentProblem.requires_unit && (
@@ -150,6 +283,7 @@ export default function ExamPage() {
                     placeholder="Unit"
                     value={answers[currentProblem.problem_id]?.unit || ''}
                     onChange={(e) => handleUnitChange(currentProblem.problem_id, e.target.value)}
+                    disabled={isSubmitting}
                     title="Enter unit (e.g. m/s, kN m, m^2, ms)"
                     suppressHydrationWarning
                   />
@@ -225,7 +359,7 @@ export default function ExamPage() {
           </table>
           <div style={{ textAlign: 'center', marginTop: '30px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }} suppressHydrationWarning>
             <button className="moodle-btn" style={{ background: '#6c757d' }} onClick={() => setShowSummary(false)} suppressHydrationWarning>Return to attempt</button>
-            <button className="moodle-btn moodle-btn-primary" onClick={() => setShowModal(true)} suppressHydrationWarning>Submit all and finish</button>
+            <button className="moodle-btn moodle-btn-primary" onClick={() => setShowModal(true)} disabled={isSubmitting} suppressHydrationWarning>Submit all and finish</button>
           </div>
         </div>
       )}
@@ -242,11 +376,19 @@ export default function ExamPage() {
             )}
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '20px' }} suppressHydrationWarning>
               <button className="moodle-btn" style={{ background: '#6c757d' }} onClick={() => setShowModal(false)} suppressHydrationWarning>Cancel</button>
-              <button className="moodle-btn moodle-btn-primary" onClick={submitAll} suppressHydrationWarning>Submit all and finish</button>
+              <button className="moodle-btn moodle-btn-primary" onClick={submitAll} disabled={isSubmitting} suppressHydrationWarning>Submit all and finish</button>
             </div>
           </div>
         </div>
       )}
     </div>
+  );
+}
+
+export default function ExamPage() {
+  return (
+    <Suspense fallback={<div style={{ padding: '50px', textAlign: 'center' }} suppressHydrationWarning>Loading exam...</div>}>
+      <ExamContent />
+    </Suspense>
   );
 }
