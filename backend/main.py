@@ -42,6 +42,7 @@ def seed_db_endpoint():
 @app.get("/api/health")
 def health_check():
     """Health check endpoint."""
+    import os
     import urllib.parse
     db_url = os.getenv("DATABASE_URL", "")
     parsed = urllib.parse.urlparse(db_url)
